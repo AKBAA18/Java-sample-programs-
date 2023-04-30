@@ -1,0 +1,45 @@
+create table worker(worker_id int primary key,firstname varchar(20),lname varchar(30),salary int ,join_date timestamp , department varchar(30));
+insert into worker values(001,"Monika","Arora" , 100000,'2014-02-20 09:00:00','HR');
+insert into worker values(002,"Niharika","Verma" , 80000,'2014-06-11 09:00:00','ADMIN');
+insert into worker values(003,"Vishal","Singhal" , 300000,'2014-02-20 09:00:00','HR');
+insert into worker values(004,"Amitabh","Singh" , 500000,'2014-02-20 09:00:00','ADMIN');
+insert into worker values(005,"Vivek","Bhati" , 500000,'2014-02-11 09:00:00','ADMIN');
+insert into worker values(006,"Vipul","Diwan" , 200000,'2014-02-11 09:00:00','ACCOUNT');
+insert into worker values(007,"Satish","Kumar" , 75000,'2014-02-20 09:00:00','ACCOUNT');
+insert into worker values(008,"GEetika","chauhan" , 90000,'2014-04-11 09:00:00','ADMIN');
+select * from worker order by firstname asc, department desc;
+select * from worker where firstname="Vipul" or  firstname="Satish";
+select * from worker where firstname in ('Vipul','Satish');/*another way*/
+select * from worker where department="ADMIN";
+select * from worker where firstname like 'a%';/*for starting name with a */
+select * from worker where firstname like '%a';/*for ending name with a */
+select * from worker where firstname like '%a%';/*for name conatining  with a */
+select * from worker where firstname like '______h';/*for name end with h */
+select * from worker where salary between 100000 and 500000;
+/*select * from worker where (join_date,'mon')='feb';*/
+select count(firstname) from worker where department="ADMIN";
+select firstname from worker where salary >=50000 and salary<=100000;
+/*select department,count(firstname) countfname from worker group by department by countfname desc;*/
+/*delete from worker where firstname='Monika';*/
+select * from worker;
+/*alter table worker drop column firstname;*/
+select * from worker;
+/*select lname,avg(salary) as average from worker where average>200000;*/
+select case (department) when 'HR' then 'ADMIN' when 'ADMIN' then 'HR' else 'NO IDEA ' end from worker;
+
+
+
+create table prodorder(id int unique,firstname varchar(30) ,orderitem varchar(20),price int);
+insert into prodorder values(001,"Monika","PS2",10000);
+insert into prodorder values(002,"AKSHAY","PS3",40000);
+insert into prodorder values(003,"Amitabh","ps5", 600000);
+insert into prodorder  values(004,"Vivek","ROBOT", 500000);
+insert into prodorder values(005,"VIPUL","HELICOPTER", 450000);
+insert into prodorder values(006,"SAtishh","PLANE" , 200000);
+insert into prodorder values(007,"GEetika","BOOK", 75000);
+insert into prodorder values(008,"Bala","phone",90000);
+select * from prodorder;
+
+/*left join*/
+select *  from worker left join prodorder on worker.firstname=prodorder.firstname;
+select worker_id,worker.firstname ,worker.salary,prodorder.orderitem from worker right join prodorder on worker.firstname=prodorder.firstname;
